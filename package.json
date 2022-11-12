@@ -1,0 +1,41 @@
+{
+  "name": "image-processing-api",
+  "version": "1.0.0",
+  "description": "this project processing image with required width and hiegt ",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon  src/index.ts",
+    "build": "npx tsc",
+    "test": "npm run build && npm run jasmine",
+    "jasmine": "jasmine",
+    "prettier": "prettier --config .prettierrc \"src/**/*.ts\" --write",
+    "lint": "eslint **/*.ts",
+    "dev": "nodemon dist/index.js"
+  },
+  "author": "Baher Hamed",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "prettier": "^2.7.1",
+    "sharp": "^0.31.2",
+    "supertest": "^6.3.1",
+    "jasmine": "^4.5.0",
+    "jasmine-spec-reporter": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/jasmine": "^4.3.0",
+    "@types/node": "^18.11.9",
+    "@types/sharp": "^0.31.0",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.5.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  },
+  "repository": {
+    "type": "github",
+    "url": ""
+  }
+}
