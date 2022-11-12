@@ -1,9 +1,7 @@
-import { Request, Response } from 'express'
+import { Request, Response } from 'express';
 import { promises as fs } from 'fs';
 import sharp from 'sharp';
-import { query } from 'express-validator';
 
-sharp()
 const getImageMidleware = async (
   req: Request,
   res: Response,
@@ -11,13 +9,11 @@ const getImageMidleware = async (
 ): Promise<void> => {
   const width = Number(req.query.width);
   const height = Number(req.query.height);
-  if (!query('width' && 'height').isNumeric()) {
-    console.log('error query');
+  if (isNaN(width && height)) {
     res.status(400);
     res.send('Please set dimintion to numbers only');
-    
+    return;
   }
-
 
   const mainDir = './src/assets';
   const outputPath = mainDir + '/thumb/';
@@ -34,23 +30,20 @@ const getImageMidleware = async (
       imageExtention = pic.split('.')[1];
     }
   }
+  if (imageName) {
+    const readNewImage = await fs.readFile(
+      outputPath + imageName + '_thumb' + '.' + imageExtention
+    );
+    const selectedImage = sharp(readNewImage);
 
-  const readNewImage = await fs.readFile(
-    outputPath + imageName + '_thumb' + '.' + imageExtention
-  );
-
-  const selectedImage = sharp(readNewImage);
-
-  const imageDimintion = await selectedImage.metadata();
-  if (imageDimintion.width === width && imageDimintion.height === height) {
-    res.contentType(`image/${imageExtention}`);
-    res.send(readNewImage);
-
+    const imageDimintion = await selectedImage.metadata();
+    if (imageDimintion.width === width && imageDimintion.height === height) {
+      res.contentType(`image/${imageExtention}`);
+      res.send(readNewImage);
+    }
   } else {
-    next()
+    next();
   }
-
-
 };
 
 export default getImageMidleware;

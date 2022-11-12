@@ -1,27 +1,27 @@
 import sharp from 'sharp';
-import { Request, Response } from 'express'
+import { Request, Response } from 'express';
 import { promises as fs } from 'fs';
-import { query } from 'express-validator';
-sharp()
+
 const queryParm = async (
   req: Request,
   res: Response,
   next: () => void
 ): Promise<void> => {
-    if (!query('width' && 'height').isNumeric()) {
+  let width = Number(req.query.width);
+  let height = Number(req.query.height);
+  if (isNaN(width && height)) {
     console.log('error query');
     res.status(400);
     res.send('Please set dimintion to numbers only');
-    
+    return;
   }
+
   const mainDir = './src/assets';
   const imagePath = mainDir + '/images/';
   const outputPath = mainDir + '/thumb/';
 
   await fs.mkdir(outputPath, { recursive: true });
   const name = req.query.filename;
-  let width = Number(req.query.width);
-  let height = Number(req.query.height);
 
   const imageDir = await fs.readdir(imagePath);
 
