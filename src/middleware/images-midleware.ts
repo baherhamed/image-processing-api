@@ -13,8 +13,8 @@ const queryParm = async (
 
   await fs.mkdir(outputPath, { recursive: true });
   const name = req.query.filename;
-  let width = Number(req.query.width)
-  let height = Number(req.query.height)
+  let width = Number(req.query.width);
+  let height = Number(req.query.height);
 
   const imageDir = await fs.readdir(imagePath);
 

@@ -10,7 +10,7 @@
     "jasmine": "jasmine",
     "prettier": "prettier --config .prettierrc \"src/**/*.ts\" --write",
     "lint": "eslint **/*.ts",
-    "dev": "nodemon dist/index.js"
+    "start-build": "nodemon dist/index.js"
   },
   "author": "Baher Hamed",
   "license": "ISC",

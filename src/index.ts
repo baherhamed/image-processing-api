@@ -9,7 +9,6 @@ app.get('/', (req: express.Request, res: express.Response) => {
   res.status(200).send('Server Working!!');
 });
 
-
 app.use('/api', routes);
 const server = app.listen(port, () => {
   console.log(`

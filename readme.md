@@ -11,9 +11,29 @@ if image exisit with the same name regarlds image extension and dimintion, if im
 
     npm install
 
-## Example :
+## API :
 
-    http://localhost:3000/api/images?filename=<filename>&&width=<width>&&height=<height>
+    # http://localhost:3000/api/images //return default.png image  with width=700 and height=700px;
+
+    # http://localhost:3000/api/images?filename=<filename> //return  image if images exisit with width=700 and height=700px ,if image not exisit will return default.png image
+                                                            with width=700 and height=700px;
+
+    # http://localhost:3000/api/images?filename=<filename>&width=<width> //return  image if images exisit with width=<width value on param> and height=700px ,if image not exisit will return default.png image
+                                                            with width=<width value on param>  and height=700px;
+
+     # http://localhost:3000/api/images?filename=<filename>&height=<height> //return  image if images exisit with height=<height value on param> and width=700px ,if image not exisit will return default.png image
+                                                            with height=<height value on param>  and width=700px;
+
+    http://localhost:3000/api/images?filename=<filename>&width=<width>&height=<height> //return  image if images exisit with height=<height value on param> and width=<width value on param> ,if image not exisit will return default.png image with height=<height value on param>  and <width value on param>;
+
+## Scripts:
+
+    * npm run start // start project after install dependencies in development;
+    * npm run build // to build project;
+    * npm run test // to build project then test project with jasmine;
+    * npm run prettier // to make style for code in all project;
+    * npm run lint // to lint project;
+    * npm run start-build // to run project after build;
 
 ## workflow :
 
