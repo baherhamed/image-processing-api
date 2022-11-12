@@ -1,12 +1,19 @@
-import express from 'express';
-import { promises as fs } from 'fs';
 import sharp from 'sharp';
-
+import { Request, Response } from 'express'
+import { promises as fs } from 'fs';
+import { query } from 'express-validator';
+sharp()
 const queryParm = async (
-  req: express.Request,
-  res: express.Response,
+  req: Request,
+  res: Response,
   next: () => void
-) => {
+): Promise<void> => {
+    if (!query('width' && 'height').isNumeric()) {
+    console.log('error query');
+    res.status(400);
+    res.send('Please set dimintion to numbers only');
+    
+  }
   const mainDir = './src/assets';
   const imagePath = mainDir + '/images/';
   const outputPath = mainDir + '/thumb/';

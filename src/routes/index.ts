@@ -1,8 +1,18 @@
 import express from 'express';
-import images from './api/images';
+import { Request, Response } from 'express';
+import getImageMidleware from '../middleware/get-image-midleware';
+import processImageMiddleware from '../middleware/process-image-midleware';
+
 
 const routes = express.Router();
 
-routes.use('/images', images);
+routes.use('/images', [getImageMidleware, processImageMiddleware], async (req: Request, res: Response, next: () => void) => {
+
+    console.log('getImageMidleware', getImageMidleware);
+    console.log('processImageMiddleware', processImageMiddleware);
+
+    next()
+});
+
 
 export default routes;
