@@ -7,23 +7,30 @@ const queryParm = async (
   res: Response,
   next: () => void
 ): Promise<void> => {
-  let width = Number(req.query.width);
-  let height = Number(req.query.height);
+  const width = Number(req.query.width);
+  const height = Number(req.query.height);
+
   if (isNaN(width && height)) {
-    console.log('error query');
     res.status(400);
     res.send('Please set dimintion to numbers only');
     return;
   }
 
   const mainDir = './src/assets';
+  await fs.mkdir(mainDir + '/thumb/', { recursive: true });
   const imagePath = mainDir + '/images/';
   const outputPath = mainDir + '/thumb/';
 
-  await fs.mkdir(outputPath, { recursive: true });
   const name = req.query.filename;
 
   const imageDir = await fs.readdir(imagePath);
+  const thumbDir = await fs.readdir(outputPath);
+
+  for await (const img of thumbDir) {
+    if (img && img.split(',')[0] === name) {
+      await fs.unlink(outputPath + img);
+    }
+  }
 
   let imageName;
   let imageExtention;
@@ -36,11 +43,12 @@ const queryParm = async (
   }
 
   if (!imageName) {
-    imageName = 'default';
-    imageExtention = 'png';
-    width = 700;
-    height = 700;
+    res.status(400);
+    res.send('Image not found');
+    next();
+    return;
   }
+
   const fullImageName = imageName + '.' + imageExtention;
 
   const readImage = await fs.readFile(imagePath + fullImageName);
@@ -49,10 +57,10 @@ const queryParm = async (
   newSize.resize(width, height);
 
   await newSize.toFile(
-    outputPath + imageName + '_thumb' + '.' + imageExtention
+    outputPath + imageName + ',' + width + ',' + height + '.' + imageExtention
   );
   const readNewImage = await fs.readFile(
-    outputPath + imageName + '_thumb' + '.' + imageExtention
+    outputPath + imageName + ',' + width + ',' + height + '.' + imageExtention
   );
   res.contentType(`image/${imageExtention}`);
   res.send(readNewImage);

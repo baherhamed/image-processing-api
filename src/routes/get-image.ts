@@ -1,7 +1,7 @@
-import express from 'express';
+// import express from 'express';
 
-const images = express.Router();
+// const images = express.Router();
 
-images.get('/', images);
+// images.get('/', images);
 
-export default images;
+// export default images;

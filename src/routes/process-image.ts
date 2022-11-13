@@ -1,8 +1,8 @@
-import express from 'express';
-import processImageMidleware from '../middleware/process-image-midleware';
+// import express from 'express';
+// import processImageMidleware from '../middleware/process-image-midleware';
 
-const images = express.Router();
+// const images = express.Router();
 
-images.get('/', processImageMidleware);
+// images.get('/', processImageMidleware);
 
-export default images;
+// export default images;
