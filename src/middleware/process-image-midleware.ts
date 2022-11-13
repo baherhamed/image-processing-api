@@ -7,8 +7,8 @@ const processImageMiddleware = async (
   res: Response,
   next: () => void
 ): Promise<void> => {
-  const width = Number(req.query.width);
-  const height = Number(req.query.height);
+  const width = Number(req.query.width) || 700;
+  const height = Number(req.query.height) || 700;
 
   if (isNaN(width && height)) {
     res.status(400);

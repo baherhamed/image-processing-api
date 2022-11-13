@@ -4,10 +4,6 @@ import processImageMiddleware from '../middleware/process-image-midleware';
 
 const routes = express.Router();
 
-routes.use(
-    '/images',
-    [getImageMidleware, processImageMiddleware],
-
-);
+routes.use('/images', [getImageMidleware, processImageMiddleware]);
 
 export default routes;

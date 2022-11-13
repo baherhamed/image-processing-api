@@ -9,7 +9,7 @@ const getImageMidleware = async (
   const width = Number(req.query.width);
   const height = Number(req.query.height);
 
-  if (isNaN(width && height)) {
+  if (width && height && isNaN(width && height)) {
     res.status(400);
     res.send('Please set dimintion to numbers only');
     return;
