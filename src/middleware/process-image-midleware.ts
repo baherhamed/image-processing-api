@@ -2,7 +2,7 @@ import sharp from 'sharp';
 import { Request, Response } from 'express';
 import { promises as fs } from 'fs';
 
-const queryParm = async (
+const processImageMiddleware = async (
   req: Request,
   res: Response,
   next: () => void
@@ -67,4 +67,4 @@ const queryParm = async (
   next();
 };
 
-export default queryParm;
+export default processImageMiddleware;
