@@ -23,9 +23,7 @@ describe('Unit testing the image route', function () {
   });
 
   it('should return 200 status because image but return with default sizes', async function () {
-    const response = await request(server).get(
-      '/api/images?filename=fjord'
-    );
+    const response = await request(server).get('/api/images?filename=fjord');
     expect(response.status).toBe(200);
   });
 
@@ -35,4 +33,6 @@ describe('Unit testing the image route', function () {
     );
     expect(response.status).toBe(200);
   });
+
+  //create some more tests
 });
